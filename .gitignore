@@ -1,0 +1,34 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+dist/
+build/
+
+# Virtual envs
+.venv/
+venv/
+env/
+
+# IDE
+.vscode/
+.idea/
+
+# Secrets (Rule h)
+.env
+
+# SQLite database (regenerated from scripts/init_db.py)
+data/partproof.db
+
+# Pytest
+.pytest_cache/
+
+# OS
+Thumbs.db
+.DS_Store
+
+# Mock eBay exports written by the pipeline
+data/exports/
+# Photos sent in the chat
+data/uploads/

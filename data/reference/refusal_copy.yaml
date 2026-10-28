@@ -1,0 +1,74 @@
+# PartProof refusal and out-of-scope copy v0.1 (TRD 6)
+# Refusals are one or two sentences, in the seller's language, and never
+# block the rest of the workflow. Each refusal offers an alternative.
+# Used by app/semantic/intents.py for policy_request and out_of_scope.
+
+version: "0.1"
+date: "2026-10-27"
+
+policy:
+  fitment:
+    reason: "Fitment comes only from an exact part-number lookup (Rule c)."
+    en: "I can't add that: fitment needs a verified part number."
+    ar: "لا أستطيع إضافة ذلك: التوافق يحتاج إلى رقم قطعة موثّق."
+    alternative_en: "I'll list the donor vehicle as information plus verified fitments only, and invite buyers to check their part number."
+    alternative_ar: "سأذكر السيارة المانحة كمعلومة مع التوافقات الموثّقة فقط، وأدعو المشترين لمطابقة رقم القطعة."
+  hide_defect:
+    reason: "Known defects must be disclosed."
+    en: "I can't leave that out: known defects must be disclosed."
+    ar: "لا أستطيع حذف ذلك: يجب الإفصاح عن العيوب المعروفة."
+    alternative_en: "Add a close-up photo and a plain description of the defect."
+    alternative_ar: "أضف صورة قريبة ووصفًا واضحًا للعيب."
+  function_claim:
+    reason: "Test status comes only from a seller answer or a test record (Rule d)."
+    en: "I can't write that: there is no test record."
+    ar: "لا أستطيع كتابة ذلك: لا يوجد سجل فحص."
+    alternative_en: "Say \"Untested\", or record a test result now."
+    alternative_ar: "اكتب «غير مفحوص»، أو سجّل نتيجة فحص الآن."
+  authenticity:
+    reason: "Authenticity cannot be certified."
+    en: "I can't call it genuine OEM: authenticity cannot be certified."
+    ar: "لا أستطيع وصفها بأنها أصلية: لا يمكن تأكيد الأصالة."
+    alternative_en: "I can state the brand marking visible on the label, with the photo."
+    alternative_ar: "يمكنني ذكر العلامة الظاهرة على الملصق مع الصورة."
+  condition_new:
+    reason: "The part is used."
+    en: "I can't mark it as new: the part is used."
+    ar: "لا أستطيع وصفها بأنها جديدة: القطعة مستعملة."
+    alternative_en: "I'll list it as used, with grade notes."
+    alternative_ar: "سأعرضها كقطعة مستعملة مع ملاحظات عن حالتها."
+  status_change:
+    reason: "Statuses are computed by rules from the evidence (Rules a and b)."
+    en: "I can't change a part's status: statuses are computed from the evidence."
+    ar: "لا أستطيع تغيير حالة القطعة: الحالات تُحسب من الأدلة."
+    alternative_en: "Answer the open questions and the status updates on its own."
+    alternative_ar: "أجب عن الأسئلة المفتوحة وستتحدث الحالة تلقائيًا."
+  admin:
+    reason: "No admin intent exists in chat."
+    en: "There is no admin mode in this chat."
+    ar: "لا يوجد وضع إدارة في هذه المحادثة."
+    alternative_en: "I can answer questions about your parts or record your answers."
+    alternative_ar: "يمكنني الإجابة عن أسئلة حول قطعك أو تسجيل إجاباتك."
+  export:
+    reason: "Export needs the seller's explicit approval in the review screen."
+    en: "I can't export from chat: export needs your approval."
+    ar: "لا أستطيع التصدير من المحادثة: التصدير يحتاج موافقتك."
+    alternative_en: "Open the review screen and press Approve when a part is ready."
+    alternative_ar: "افتح شاشة المراجعة واضغط «موافقة» عندما تكون القطعة جاهزة."
+  other:
+    reason: "Request is outside the chat's allowed intents."
+    en: "I can't do that from chat."
+    ar: "لا أستطيع القيام بذلك من المحادثة."
+    alternative_en: "I can answer questions about your parts or record your answers."
+    alternative_ar: "يمكنني الإجابة عن أسئلة حول قطعك أو تسجيل إجاباتك."
+
+out_of_scope:
+  customs:
+    en: "This is not customs or legal advice. Here is the TEST checklist status instead."
+    ar: "هذه ليست استشارة جمركية أو قانونية. إليك حالة قائمة التحقق التجريبية بدلًا من ذلك."
+  legal:
+    en: "This is not legal advice. Here is the TEST checklist status instead."
+    ar: "هذه ليست استشارة قانونية. إليك حالة قائمة التحقق التجريبية بدلًا من ذلك."
+  other:
+    en: "That's outside what I can help with here."
+    ar: "هذا خارج ما يمكنني المساعدة فيه هنا."

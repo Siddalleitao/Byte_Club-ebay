@@ -1,0 +1,8 @@
+{
+  "content": "{\"part_number\": \"87910-02A10\", \"part_numbers\": [{\"number\": \"87910-02A10\", \"class\": \"OEM\"}], \"position\": \"left\", \"colour\": null, \"features\": [], \"condition_notes\": \"Minor scuffs on housing\", \"label_readable\": true, \"brand\": \"Toyota\", \"is_aftermarket\": false}",
+  "usage": {
+    "input_tokens": 1500,
+    "output_tokens": 300
+  },
+  "model": "claude-sonnet-5-5"
+}

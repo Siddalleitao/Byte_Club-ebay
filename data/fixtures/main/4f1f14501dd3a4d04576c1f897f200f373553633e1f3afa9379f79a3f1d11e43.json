@@ -1,0 +1,8 @@
+{
+  "content": "{\"part_number\": \"87910-0????\", \"part_numbers\": [{\"number\": \"87910-0????\", \"class\": \"OEM\"}], \"position\": \"right\", \"colour\": null, \"features\": [], \"condition_notes\": \"Lower mounting tab may have crack (photo 3)\", \"label_readable\": false, \"brand\": \"Toyota\", \"is_aftermarket\": false}",
+  "usage": {
+    "input_tokens": 1500,
+    "output_tokens": 300
+  },
+  "model": "claude-sonnet-5-5"
+}

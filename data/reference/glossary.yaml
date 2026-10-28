@@ -1,0 +1,294 @@
+# PartProof Glossary v0.2
+# English and Arabic automotive terms for the UAE → UK corridor.
+# Terms marked ambiguous require clarification before use in listings.
+#
+# `terms` is the human-readable bilingual glossary.
+# `vocabularies` are the controlled vocabularies the semantic layer
+# (app/semantic/glossary.py) uses to normalise free text into fixed values.
+# `digits` drives Arabic-Indic digit normalisation.
+
+version: "0.2"
+date: "2026-10-27"
+
+terms:
+  # ── Side / Position ──
+  - term_en: "left side"
+    term_ar: "اليسار"
+    domain: position
+    ambiguous: false
+    note: "Absolute, as seen from the driver's seat (seated inside, facing forward)."
+
+  - term_en: "right side"
+    term_ar: "اليمين"
+    domain: position
+    ambiguous: false
+    note: "Absolute, as seen from the driver's seat (seated inside, facing forward)."
+
+  - term_en: "driver side"
+    term_ar: "جانب السائق"
+    domain: position
+    ambiguous: true
+    note: >
+      AMBIGUOUS. In LHD markets (most of the world), driver side = left side.
+      In RHD markets (UK, Japan, Australia), driver side = right side.
+      Must be clarified to left/right before use in a listing.
+
+  - term_en: "passenger side"
+    term_ar: "جانب الراكب"
+    domain: position
+    ambiguous: true
+    note: >
+      AMBIGUOUS. In LHD markets, passenger side = right side.
+      In RHD markets, passenger side = left side.
+      Must be clarified to left/right before use in a listing.
+
+  # ── UK English mirror terms ──
+  - term_en: "wing mirror"
+    term_ar: "مرآة الجناح"
+    domain: part_name
+    ambiguous: false
+    note: "UK English term for side-view mirror. Used in eBay UK listings."
+
+  - term_en: "door mirror"
+    term_ar: "مرآة الباب"
+    domain: part_name
+    ambiguous: false
+    note: "UK English term for side-view mirror. Common alternative to 'wing mirror' in UK listings."
+
+  # ── Part condition ──
+  - term_en: "tested OK"
+    term_ar: "تم اختباره بنجاح"
+    domain: functionality
+    ambiguous: false
+    note: "Seller claim — requires a test record to be Verified status."
+
+  - term_en: "untested"
+    term_ar: "غير مختبر"
+    domain: functionality
+    ambiguous: false
+    note: "No test record exists and no seller confirmation of functionality."
+
+  - term_en: "power fold"
+    term_ar: "طي كهربائي"
+    domain: feature
+    ambiguous: false
+
+  - term_en: "heated"
+    term_ar: "مُسخّن"
+    domain: feature
+    ambiguous: false
+
+  - term_en: "auto-dimming"
+    term_ar: "تعتيم تلقائي"
+    domain: feature
+    ambiguous: false
+
+  - term_en: "auto-dim"
+    term_ar: "تعتيم تلقائي"
+    domain: feature
+    ambiguous: false
+    note: "Short form of auto-dimming."
+
+  # ── Vehicle terms ──
+  - term_en: "GCC spec"
+    term_ar: "مواصفات الخليج"
+    domain: market
+    ambiguous: false
+    note: "Gulf Cooperation Council specification vehicle. Typically LHD."
+
+  - term_en: "LHD"
+    term_ar: "قيادة يسار"
+    domain: market
+    ambiguous: false
+    note: "Left-hand drive. Driver sits on the left."
+
+  - term_en: "RHD"
+    term_ar: "قيادة يمين"
+    domain: market
+    ambiguous: false
+    note: "Right-hand drive. Driver sits on the right."
+
+  - term_en: "mounting tab"
+    term_ar: "لسان التثبيت"
+    domain: part_component
+    ambiguous: false
+    note: "Plastic tab that secures the mirror to the vehicle door frame."
+
+  - term_en: "mounting ear"
+    term_ar: "أذن التثبيت"
+    domain: part_component
+    ambiguous: false
+    note: "Alternative term for mounting tab."
+
+# ── Arabic-Indic digit normalisation (E10) ──
+# Each string lists the digits 0-9 in order. The raw text is kept as evidence.
+digits:
+  arabic_indic: "٠١٢٣٤٥٦٧٨٩"
+  extended_arabic_indic: "۰۱۲۳۴۵۶۷۸۹"
+
+# ── Controlled vocabularies ──
+# Each value lists English and Arabic synonyms. Matching is whole-phrase,
+# longest phrase first, after Unicode, digit and Arabic letter folding.
+# `ambiguous` phrases are recognised so the system can ask, but are never stored.
+# `forbidden` phrases are recognised so the system can decline them.
+vocabularies:
+  part_type:
+    values:
+      side_view_mirror:
+        en: ["side-view mirror", "side view mirror", "wing mirror", "door mirror", "mirror"]
+        ar: ["مرآة جانبية", "مراية جانبية", "مرآة الجناح", "مرآة الباب", "مرآة"]
+        uk_search_terms: ["wing mirror", "door mirror"]
+        category_suggestion: "eBay Motors UK > Car Parts > Exterior > Mirrors > Wing Mirrors (suggestion; confirm before listing)"
+      airbag_module:
+        en: ["airbag", "airbag module", "air bag"]
+        ar: ["وسادة هوائية", "ايرباق", "إيرباق"]
+        excluded: true
+
+  position:
+    note: "Left and right are absolute, as seen from the driver's seat. Driver side and passenger side are ambiguous (UAE cars are left-hand drive, UK cars right-hand drive) and are never stored."
+    values:
+      left:
+        en: ["left", "left side", "left hand", "lh", "l/h"]
+        ar: ["يسار", "اليسار", "يسرى", "اليسرى", "الجهة اليسرى", "الجانب الأيسر", "أيسر"]
+      right:
+        en: ["right", "right side", "right hand", "rh", "r/h"]
+        ar: ["يمين", "اليمين", "يمنى", "اليمنى", "الجهة اليمنى", "الجانب الأيمن", "أيمن"]
+    ambiguous:
+      # Drive-side phrases describe the car's market, not the part's position.
+      en: ["driver side", "driver's side", "drivers side", "passenger side", "passenger's side", "passengers side",
+           "left hand drive", "right hand drive", "lhd", "rhd"]
+      ar: ["جهة السائق", "جانب السائق", "جهة الراكب", "جانب الراكب", "قيادة يسار", "قيادة يمين"]
+
+  condition:
+    values:
+      used:
+        en: ["used", "second hand", "second-hand", "pre-owned"]
+        ar: ["مستعمل", "مستعملة", "مستخدم"]
+      for_parts_not_working:
+        en: ["for parts", "for parts or not working", "spares or repair", "spares"]
+        ar: ["للقطع", "قطع غيار فقط"]
+    forbidden:
+      en: ["new", "brand new", "as new"]
+      ar: ["جديد", "جديدة", "جديد تماما"]
+
+  defect:
+    values:
+      broken_glass:
+        en: ["broken glass", "glass broken", "cracked glass", "glass cracked", "smashed glass"]
+        ar: ["زجاج مكسور", "الزجاج مكسور", "زجاج مشروخ", "الزجاج مشروخ"]
+      crack:
+        en: ["crack", "cracked", "cracks"]
+        ar: ["مشروخ", "مشروخة", "شرخ"]
+      broken:
+        en: ["broken", "snapped"]
+        ar: ["مكسور", "مكسورة", "كسر"]
+      scratch:
+        en: ["scratch", "scratched", "scratches", "scuffed"]
+        ar: ["مخدوش", "مخدوشة", "خدش", "خدوش"]
+      missing_component:
+        en: ["missing", "missing cover", "missing glass", "missing indicator"]
+        ar: ["ناقص", "ناقصة", "مفقود"]
+      none:
+        en: ["no damage", "no defects", "undamaged", "no cracks"]
+        ar: ["لا يوجد ضرر", "بدون ضرر", "سليم", "سليمة", "بدون عيوب"]
+
+  # Where a defect is: keeps "the tab is cracked" tied to the mounting tab in the disclosure.
+  component:
+    values:
+      mounting_tab:
+        en: ["lower mounting tab", "upper mounting tab", "mounting tab", "tab"]
+        ar: ["لسان التثبيت السفلي", "لسان التثبيت", "اللسان", "لسان", "التاب"]
+        label: "mounting tab"
+      mounting_ear:
+        en: ["mounting ear", "upper mounting ear", "ear"]
+        ar: ["أذن التثبيت", "الأذن"]
+        label: "mounting ear"
+      glass:
+        en: ["mirror glass", "glass"]
+        ar: ["الزجاج", "زجاج", "المرآة"]
+        label: "glass"
+      cover:
+        en: ["cover", "cap", "housing"]
+        ar: ["الغطاء", "غطاء", "الهيكل"]
+        label: "cover"
+      indicator:
+        en: ["indicator", "turn signal"]
+        ar: ["الإشارة", "اشارة", "الغماز"]
+        label: "indicator"
+      wiring_plug:
+        en: ["wiring plug", "connector", "plug"]
+        ar: ["قابس الأسلاك", "الفيشة", "القابس"]
+        label: "wiring plug"
+      base:
+        en: ["base", "arm", "mount"]
+        ar: ["القاعدة", "الذراع"]
+        label: "base"
+
+  test_status:
+    note: "Only from a seller answer or a test record, never from photos or OCR (Rule d)."
+    values:
+      untested:
+        en: ["untested", "not tested", "never tested", "haven't tested", "have not tested"]
+        ar: ["لم يتم فحصه", "لم يتم فحصها", "غير مفحوص", "غير مختبر", "لم يفحص", "ما انفحص"]
+      seller_reported_working:
+        en: ["tested working", "tested and working", "tested ok", "tested okay", "works", "working", "it works", "works fine"]
+        ar: ["تم فحصه ويعمل", "تم فحصها وتعمل", "يعمل", "تعمل", "شغال", "شغالة", "تم اختباره بنجاح"]
+      partly_tested:
+        en: ["partly tested", "partially tested", "part tested", "some functions tested"]
+        ar: ["فحص جزئي", "تم فحص جزء", "مفحوص جزئيا"]
+      failed:
+        en: ["failed", "failed test", "not working", "does not work", "doesn't work", "dead"]
+        ar: ["لا يعمل", "لا تعمل", "عطلان", "عطلانة", "خربان", "فشل الفحص"]
+
+  features:
+    values:
+      power_fold:
+        en: ["power fold", "power folding", "power-fold", "electric fold", "electric folding", "fold", "folding"]
+        ar: ["طي كهربائي", "قابل للطي كهربائيا"]
+      heated:
+        en: ["heated", "heater", "heated glass"]
+        ar: ["مسخن", "تسخين", "مُسخّن"]
+      auto_dim:
+        en: ["auto-dimming", "auto dimming", "auto-dim", "auto dim"]
+        ar: ["تعتيم تلقائي"]
+      indicator:
+        en: ["indicator", "turn signal", "side repeater"]
+        ar: ["إشارة", "اشارة", "غماز"]
+      camera:
+        en: ["camera", "360 camera"]
+        ar: ["كاميرا"]
+      blind_spot:
+        en: ["blind spot", "blind-spot", "bsm"]
+        ar: ["النقطة العمياء"]
+
+  # Business-term → attribute field names, so "which parts need weight?"
+  # resolves to the `weight` field.
+  field:
+    values:
+      part_number:
+        en: ["part number", "part no", "oem number", "label number"]
+        ar: ["رقم القطعة"]
+      position:
+        en: ["side", "position"]
+        ar: ["الجهة", "الجانب"]
+      donor_year:
+        en: ["year", "donor year"]
+        ar: ["سنة", "السنة", "سنة الصنع"]
+      donor_model:
+        en: ["model", "donor model"]
+        ar: ["طراز", "الطراز"]
+      weight:
+        en: ["weight", "packed weight"]
+        ar: ["وزن", "الوزن"]
+      dimensions:
+        en: ["dimensions", "size", "measurements"]
+        ar: ["الأبعاد", "ابعاد", "المقاسات"]
+      test_status:
+        en: ["test status", "tested", "test"]
+        ar: ["الفحص", "حالة الفحص"]
+      condition_notes:
+        en: ["condition", "damage", "defects"]
+        ar: ["الحالة", "الضرر", "العيوب"]
+      price:
+        en: ["price"]
+        ar: ["السعر", "سعر"]

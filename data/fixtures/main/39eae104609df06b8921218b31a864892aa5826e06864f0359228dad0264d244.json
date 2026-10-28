@@ -1,0 +1,8 @@
+{
+  "content": "{\"part_number\": \"87940-06A10\", \"part_numbers\": [{\"number\": \"87940-06A10\", \"class\": \"OEM\"}], \"position\": null, \"colour\": null, \"features\": [\"power adjustable\"], \"condition_notes\": \"Glass and housing in good condition\", \"label_readable\": true, \"brand\": \"Toyota\", \"is_aftermarket\": false}",
+  "usage": {
+    "input_tokens": 1500,
+    "output_tokens": 300
+  },
+  "model": "claude-sonnet-5-5"
+}

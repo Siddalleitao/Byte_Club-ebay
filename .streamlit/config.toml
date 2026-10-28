@@ -1,0 +1,21 @@
+[server]
+port = 8501
+
+[theme]
+base = "light"
+primaryColor = "#1a56db"
+backgroundColor = "#ffffff"
+secondaryBackgroundColor = "#f8fafc"
+textColor = "#1e293b"
+font = "sans serif"
+headingFont = "sans serif"
+codeFont = "monospace"
+borderRadius = 8
+showWidgetBorder = true
+showSidebarBorder = true
+paddingTop = 1.5
+paddingBottom = 1.5
+
+[theme.sidebar]
+backgroundColor = "#f1f5f9"
+secondaryBackgroundColor = "#e2e8f0"

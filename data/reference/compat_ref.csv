@@ -1,0 +1,17 @@
+part_number,make,model,year_from,year_to,market,position,ref_version
+87910-02A10,Toyota,Corolla,2014,2019,GCC,left,v0.1
+96302-4AA0A,Nissan,Altima,2013,2018,GCC,right,v0.1
+76200-TBA-A02,Honda,Civic,2016,2021,GCC,left,v0.1
+87940-06A10,Toyota,Camry,2012,2017,GCC,left,v0.1
+87914-30A20,Lexus,IS250,2014,2020,GCC,right,v0.1
+MR495981,Mitsubishi,Pajero,2014,2019,GCC,left,v0.1
+87910-02A20,Toyota,Corolla,2014,2019,GCC,right,v0.1
+96301-3AA0A,Nissan,Sunny,2014,2019,GCC,right,v0.1
+76200-TAA-A01,Honda,Accord,2013,2017,GCC,left,v0.1
+MR585271,Mitsubishi,Lancer,2014,2017,GCC,right,v0.1
+51162M89K9X03,BMW,3-Series,2012,2018,EU,left,v0.1
+87914-60410,Toyota,Land Cruiser,2016,2020,GCC,right,v0.1
+87610-3X300,Hyundai,Sonata,2015,2017,GCC,left,v0.1
+96301-4AA0A,Nissan,Patrol,2015,2018,GCC,left,v0.1
+HB1B-69-170,Mazda,3,2014,2018,GCC,right,v0.1
+5G0-857-507-A,Volkswagen,Golf,2012,2016,EU,left,v0.1

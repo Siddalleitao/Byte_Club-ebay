@@ -1,0 +1,120 @@
+# PartProof Listing Checklist v0.1
+#
+# WARNING: This is a TEST checklist for internal use in a hackathon prototype.
+# It is NOT customs, legal, or compliance guidance.
+# Do not use this checklist for real-world trade, customs declarations,
+# or legal compliance. All data is synthetic.
+#
+# Items follow TRD 8 (test checklist v0.1, UAE to UK).
+#   blocking: true   → a failure blocks "Ready for seller review"
+#   blocking: false  → a failure is shown as a warning only
+#   blocks: approval → the item gates approval, not readiness (C14)
+#   on_fail: specialist_review → a failure sends the part to specialist review (C01)
+# Evaluated by app/domain/readiness.py, which refuses to load if the item IDs
+# here and its evaluators differ.
+
+version: "0.1"
+date: "2026-10-27"
+purpose: "TEST checklist, not customs or legal guidance"
+disclaimer: >
+  This checklist is part of a hackathon prototype using synthetic data only.
+  It must not be used for real customs declarations, legal compliance,
+  or commercial trade decisions.
+
+items:
+  - id: C01
+    description: "Part type in scope"
+    passes_when: "Side-view mirror and not an excluded type"
+    category: identity
+    blocking: true
+    on_fail: specialist_review   # when the type is excluded (E39)
+
+  - id: C02
+    description: "Brand recorded"
+    passes_when: "Brand present, or seller confirms none visible"
+    category: identity
+    blocking: false
+
+  - id: C03
+    description: "Part number"
+    passes_when: "Readable and Verified or Seller-confirmed, or seller confirms no label"
+    category: identity
+    blocking: true
+
+  - id: C04
+    description: "Position"
+    passes_when: "Left or right, Seller-confirmed or Verified"
+    category: identity
+    blocking: true
+
+  - id: C05
+    description: "Donor vehicle consistent"
+    passes_when: "No Conflicting donor field"
+    category: identity
+    blocking: true
+
+  - id: C06
+    description: "Condition disclosed"
+    passes_when: "Every defect flag confirmed or dismissed by the seller"
+    category: disclosure
+    blocking: true
+
+  - id: C07
+    description: "Test status stated"
+    passes_when: "Tested, untested, partly tested or failed, from seller or test record"
+    category: disclosure
+    blocking: true
+
+  - id: C08
+    description: "Included components"
+    passes_when: "Glass, cover, indicator and wiring plug each marked present or missing"
+    category: disclosure
+    blocking: true
+
+  - id: C09
+    description: "Photos"
+    passes_when: "Front, back, label and mounting points, plus one per defect"
+    category: commercial
+    blocking: true
+
+  - id: C10
+    description: "Packed weight and dimensions"
+    passes_when: "Present and inside the configured range"
+    category: shipping
+    blocking: true
+
+  - id: C11
+    description: "Price"
+    passes_when: "Present, currency labelled"
+    category: commercial
+    blocking: true
+
+  - id: C12
+    description: "Compatibility labelled"
+    passes_when: "Verified fitments listed, or \"not verified\" shown"
+    category: identity
+    blocking: true   # the label, not the verification
+
+  - id: C13
+    description: "No forbidden claims"
+    passes_when: "CP5 passed"
+    category: disclosure
+    blocking: true
+
+  - id: C14
+    description: "Summary critic"
+    passes_when: "CP5b passed"
+    category: disclosure
+    blocking: true
+    blocks: approval
+
+  - id: C15
+    description: "Personal data redacted"
+    passes_when: "Plates, faces and phone numbers masked"
+    category: disclosure
+    blocking: true
+
+# Configured ranges for C10 (E38 plausibility, after unit conversion).
+shipping_ranges:
+  weight_kg: [0.2, 15.0]
+  dimension_cm: [5.0, 100.0]

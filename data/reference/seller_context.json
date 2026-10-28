@@ -1,0 +1,42 @@
+{
+  "seller_id": "S-001",
+  "name": "Noor",
+  "role": "used-auto-parts seller",
+  "location": "Dubai, UAE",
+  "language_primary": "Arabic",
+  "language_secondary": "English",
+  "whatsapp": "+971-50-123-4567",
+  "market_corridor": "UAE → UK",
+  "marketplace": "eBay UK",
+  "currency_export": "GBP",
+  "currency_local": "AED",
+  "parts_inventory": "10 demo side-view mirrors (M-01 to M-10) plus extra test records (M-11 to M-20)",
+  "seller_type": "dealer",
+  "response_expected": "seller answers questions about functionality, authenticity, side, and defects",
+  "notes": "Noor's inventory is primarily GCC-spec vehicles. Some Arabic-language donor notes. All data is synthetic.",
+  "profile": {
+    "display_name": "Noor",
+    "business_name": "Noor Auto Salvage (synthetic)",
+    "city": "Dubai, UAE",
+    "languages": [
+      "en",
+      "ar"
+    ],
+    "reply_language": "match_user",
+    "corridor": "UAE-UK",
+    "inventory_currency": "AED",
+    "listing_currency": "GBP",
+    "fx_rate_source": "test pack, dated",
+    "fx_rate": 0.2108,
+    "fx_rate_date": "2026-10-01",
+    "handling_days": 3,
+    "return_policy_ref": "TEST-RP-01",
+    "rack_codes": [
+      "A1-A6",
+      "B1-B6",
+      "C1-C4"
+    ],
+    "product_family": "side_view_mirror",
+    "checklist_version": "v0.1-test"
+  }
+}

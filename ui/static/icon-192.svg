@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="192" height="192" viewBox="0 0 192 192">
+  <rect width="192" height="192" rx="40" fill="#1a56db"/>
+  <!-- Original camera/part icon -->
+  <g fill="none" stroke="white" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" transform="translate(24,24)">
+    <path d="M120 95a40 40 0 0 1-40 40 42 42 0 0 1-20-5l-20 5 6-20a40 40 0 0 1-6-20 42 42 0 0 1 40-40 40 40 0 0 1 40 40z"/>
+    <circle cx="72" cy="95" r="16"/>
+    <!-- Checkmark inside -->
+    <polyline points="64 95 70 101 82 89" stroke-width="5"/>
+  </g>
+</svg>

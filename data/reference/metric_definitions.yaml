@@ -1,0 +1,150 @@
+# PartProof Metric Definitions v0.1
+# Defines the scoring metrics for the PartProof evaluation harness.
+
+version: "0.1"
+date: "2026-10-27"
+
+metrics:
+  - id: MET-01
+    name: "attribute_accuracy"
+    description: "Fraction of attributes whose final value matches the answer key."
+    formula: "correct_attributes / total_attributes"
+    target: ">= 0.90"
+
+  - id: MET-02
+    name: "status_accuracy"
+    description: "Fraction of attributes whose final status matches the answer key."
+    formula: "correct_statuses / total_statuses"
+    target: ">= 0.90"
+
+  - id: MET-03
+    name: "trap_detection_rate"
+    description: "Fraction of planted issues (E-IDs) correctly detected by the pipeline."
+    formula: "detected_issues / total_planted_issues"
+    target: ">= 0.85"
+
+  - id: MET-04
+    name: "false_positive_rate"
+    description: "Fraction of attributes flagged as problematic that are actually clean."
+    formula: "false_positives / (false_positives + true_negatives)"
+    target: "<= 0.10"
+
+  - id: MET-05
+    name: "checklist_pass_rate"
+    description: "Fraction of parts that pass the C01-C15 checklist for parts that should pass."
+    formula: "parts_passed / parts_expected_to_pass"
+    target: ">= 0.95"
+
+  - id: MET-06
+    name: "checklist_block_rate"
+    description: "Fraction of parts correctly blocked (not passed) by the checklist for parts that should not pass."
+    formula: "parts_blocked / parts_expected_to_block"
+    target: ">= 0.95"
+
+  - id: MET-07
+    name: "compatibility_precision"
+    description: "Fraction of compatibility claims that are correct (exact part-number match in reference)."
+    formula: "correct_compat_claims / total_compat_claims"
+    target: "1.0 (exact match only, no false compat allowed)"
+
+  - id: MET-08
+    name: "no_injection_bypass"
+    description: "Confirms no ingested instruction text changed pipeline control flow (Rule f)."
+    formula: "injection_attempts_bypassed / total_injection_attempts"
+    target: "1.0"
+
+  - id: MET-09
+    name: "cost_per_part"
+    description: "Average LLM cost per part processed."
+    formula: "total_llm_cost / parts_processed"
+    target: "<= $0.50"
+
+  - id: MET-10
+    name: "excluded_item_rejection"
+    description: "Fraction of excluded item types (e.g. airbags) correctly rejected from the mirror listing pipeline."
+    formula: "excluded_rejected / total_excluded"
+    target: "1.0"
+
+# ── Seller-facing metrics (TRD 4) ──
+# One source of truth for the numbers shown in chat, the dashboard and the
+# metrics panel. app/semantic/metrics.py implements exactly these names and
+# refuses to load if a definition has no implementation (or vice versa).
+# Every metric is computed over the logged-in seller's records only.
+semantic_metrics:
+  - name: "ready_count"
+    label_en: "Ready for seller review"
+    label_ar: "جاهزة لمراجعة البائع"
+    description: "Parts whose latest checklist evaluation passes every blocking item."
+    formula: "count(parts where latest checklist_result.passed = 1)"
+    unit: "parts"
+
+  - name: "open_questions"
+    label_en: "Open questions"
+    label_ar: "أسئلة مفتوحة"
+    description: "Seller questions still waiting for an answer."
+    formula: "count(questions where status = 'open')"
+    unit: "questions"
+
+  - name: "conflict_rate"
+    label_en: "Conflict rate"
+    label_ar: "نسبة التعارض"
+    description: "Share of recorded attributes whose sources disagree."
+    formula: "count(attributes where status = 'Conflicting') / count(attributes); 0 when there are no attributes"
+    unit: "ratio"
+
+  - name: "time_to_ready"
+    label_en: "Median time to ready"
+    label_ar: "متوسط الوقت حتى الجاهزية"
+    description: "Median hours from a part's ingestion to its first passing checklist evaluation, over parts that have reached ready."
+    formula: "median(first passing checklist_result.created_at - part.created_at) in hours; null when no part has reached ready"
+    unit: "hours"
+
+  - name: "unsupported_claims"
+    label_en: "Unsupported claims"
+    label_ar: "ادعاءات غير مدعومة"
+    description: "Draft claims with no evidence row behind them. The target is zero."
+    formula: "count(claims where evidence_id is null or does not resolve to the part's evidence)"
+    unit: "claims"
+
+  # FR-18 metrics panel: assistant numbers, shown beside the seller's manual baseline.
+  - name: "minutes_per_part"
+    label_en: "Minutes per part"
+    label_ar: "دقائق لكل قطعة"
+    description: "Median minutes from a part's pipeline start to the seller's approval, over approved parts."
+    formula: "median(first approval.approved_at - first status_change.timestamp) in minutes; null when nothing is approved"
+    unit: "minutes"
+
+  - name: "ready_per_hour"
+    label_en: "Parts reaching Ready per hour"
+    label_ar: "قطع جاهزة في الساعة"
+    description: "Parts that reached Ready for seller review, per hour since the first pipeline start."
+    formula: "count(parts with a passing checklist) / hours(first pipeline start → last first-ready), at least one minute"
+    unit: "parts/hour"
+
+  - name: "conflicts_found"
+    label_en: "Conflicts found"
+    label_ar: "تعارضات مكتشفة"
+    description: "Distinct part fields whose sources disagreed at any point (CP1 and CP2)."
+    formula: "count(distinct sku, field where an attribute was ever Conflicting)"
+    unit: "conflicts"
+
+  - name: "corrections_before_approval"
+    label_en: "Corrections before approval"
+    label_ar: "تصحيحات قبل الموافقة"
+    description: "Seller corrections of an existing value and listing-editor saves before the approval, per approved part."
+    formula: "count(seller_change with a different earlier value, seller_edit) before approval / approved parts"
+    unit: "per part"
+
+  - name: "p95_first_token_ms"
+    label_en: "p95 first chat token"
+    label_ar: "زمن أول رمز في المحادثة (المئين 95)"
+    description: "95th percentile time to the first token of a streamed chat reply. The target is under 1500 ms."
+    formula: "p95(latency_events.ms where class = 'chat_first_token')"
+    unit: "ms"
+
+  - name: "cost_per_approved_listing"
+    label_en: "Cost per approved listing"
+    label_ar: "التكلفة لكل إعلان معتمد"
+    description: "Model cost from the token log for the parts the seller approved, per approved part."
+    formula: "sum(llm_calls.total_cost for approved parts) / count(approved parts)"
+    unit: "USD"

@@ -1,0 +1,370 @@
+{
+  "version": "0.1",
+  "date": "2026-10-27",
+  "description": "Expected values, sources, and statuses for every attribute per part, plus planted issue E-IDs. Used for automatic scoring.",
+  "parts": {
+    "M-01": {
+      "description": "Fully clean and ready — reference-compatible, all attributes verifiable.",
+      "expected_status": "Approved",
+      "attributes": {
+        "part_number": {"expected_value": "87910-02A10", "source": "label OCR + spreadsheet", "status": "Verified"},
+        "side": {"expected_value": "left", "source": "spreadsheet + donor note", "status": "Verified"},
+        "functionality": {"expected_value": "seller-confirmed", "source": "seller answer", "status": "Seller-confirmed"},
+        "authenticity": {"expected_value": "seller-confirmed", "source": "seller answer", "status": "Seller-confirmed"},
+        "colour": {"expected_value": "not specified", "source": "n/a", "status": "Missing"},
+        "donor_year": {"expected_value": "2017", "source": "spreadsheet + donor note (agree)", "status": "Verified"},
+        "donor_model": {"expected_value": "Toyota Corolla", "source": "spreadsheet + donor note (agree)", "status": "Verified"},
+        "weight": {"expected_value": "recorded", "source": "donor note", "status": "Verified"},
+        "dimensions": {"expected_value": "recorded", "source": "donor note", "status": "Verified"},
+        "compatibility": {"expected_value": "Toyota Corolla 2014-2019 GCC left", "source": "reference_lookup exact match", "status": "Verified"}
+      },
+      "planted_issues": [],
+      "journey": "J1"
+    },
+    "M-02": {
+      "description": "Clean record — fully verifiable.",
+      "expected_status": "Approved",
+      "attributes": {
+        "part_number": {"expected_value": "96302-4AA0A", "source": "label OCR + spreadsheet", "status": "Verified"},
+        "side": {"expected_value": "right", "source": "spreadsheet + donor note", "status": "Verified"},
+        "functionality": {"expected_value": "seller-confirmed", "source": "seller answer", "status": "Seller-confirmed"},
+        "authenticity": {"expected_value": "seller-confirmed", "source": "seller answer", "status": "Seller-confirmed"},
+        "donor_year": {"expected_value": "2016", "source": "spreadsheet + donor note (agree)", "status": "Verified"},
+        "donor_model": {"expected_value": "Nissan Altima", "source": "spreadsheet + donor note (agree)", "status": "Verified"},
+        "weight": {"expected_value": "recorded", "source": "donor note", "status": "Verified"},
+        "dimensions": {"expected_value": "recorded", "source": "donor note", "status": "Verified"},
+        "compatibility": {"expected_value": "Nissan Altima 2013-2018 GCC right", "source": "reference_lookup exact match", "status": "Verified"}
+      },
+      "planted_issues": [],
+      "journey": "J1"
+    },
+    "M-03": {
+      "description": "Clean record — fully verifiable.",
+      "expected_status": "Approved",
+      "attributes": {
+        "part_number": {"expected_value": "76200-TBA-A02", "source": "label OCR + spreadsheet", "status": "Verified"},
+        "side": {"expected_value": "left", "source": "spreadsheet + donor note", "status": "Verified"},
+        "functionality": {"expected_value": "seller-confirmed", "source": "seller answer", "status": "Seller-confirmed"},
+        "authenticity": {"expected_value": "seller-confirmed", "source": "seller answer", "status": "Seller-confirmed"},
+        "donor_year": {"expected_value": "2018", "source": "spreadsheet + donor note (agree)", "status": "Verified"},
+        "donor_model": {"expected_value": "Honda Civic", "source": "spreadsheet + donor note (agree)", "status": "Verified"},
+        "weight": {"expected_value": "recorded", "source": "donor note", "status": "Verified"},
+        "dimensions": {"expected_value": "recorded", "source": "donor note", "status": "Verified"},
+        "compatibility": {"expected_value": "Honda Civic 2016-2021 GCC left", "source": "reference_lookup exact match", "status": "Verified"}
+      },
+      "planted_issues": [],
+      "journey": "J1"
+    },
+    "M-04": {
+      "description": "Recorded as Left in spreadsheet, donor note says 'driver side'. Journey J4 flips to Right.",
+      "expected_status": "Awaiting seller",
+      "attributes": {
+        "part_number": {"expected_value": "87940-06A10", "source": "label OCR + spreadsheet", "status": "Verified"},
+        "side": {"expected_value": "right", "source": "seller answer (J4 flip)", "status": "Seller-confirmed"},
+        "functionality": {"expected_value": "seller-confirmed", "source": "seller answer", "status": "Seller-confirmed"},
+        "authenticity": {"expected_value": "seller-confirmed", "source": "seller answer", "status": "Seller-confirmed"},
+        "donor_year": {"expected_value": "2017", "source": "spreadsheet + donor note (agree)", "status": "Verified"},
+        "donor_model": {"expected_value": "Toyota Camry", "source": "spreadsheet + donor note (agree)", "status": "Verified"},
+        "weight": {"expected_value": "recorded", "source": "donor note", "status": "Verified"},
+        "dimensions": {"expected_value": "recorded", "source": "donor note", "status": "Verified"},
+        "compatibility": {"expected_value": "Toyota Camry 2012-2017 GCC left", "source": "reference_lookup exact match", "status": "Verified"}
+      },
+      "planted_issues": ["E22"],
+      "journey": "J4"
+    },
+    "M-05": {
+      "description": "Clean record — fully verifiable.",
+      "expected_status": "Approved",
+      "attributes": {
+        "part_number": {"expected_value": "87914-30A20", "source": "label OCR + spreadsheet", "status": "Verified"},
+        "side": {"expected_value": "right", "source": "spreadsheet + donor note", "status": "Verified"},
+        "functionality": {"expected_value": "seller-confirmed", "source": "seller answer", "status": "Seller-confirmed"},
+        "authenticity": {"expected_value": "seller-confirmed", "source": "seller answer", "status": "Seller-confirmed"},
+        "donor_year": {"expected_value": "2015", "source": "spreadsheet + donor note (agree)", "status": "Verified"},
+        "donor_model": {"expected_value": "Lexus IS250", "source": "spreadsheet + donor note (agree)", "status": "Verified"},
+        "weight": {"expected_value": "recorded", "source": "donor note", "status": "Verified"},
+        "dimensions": {"expected_value": "recorded", "source": "donor note", "status": "Verified"},
+        "compatibility": {"expected_value": "Lexus IS250 2014-2020 GCC right", "source": "reference_lookup exact match", "status": "Verified"}
+      },
+      "planted_issues": [],
+      "journey": "J1"
+    },
+    "M-06": {
+      "description": "Weight missing, no other issues.",
+      "expected_status": "Guarded",
+      "attributes": {
+        "part_number": {"expected_value": "MR495981", "source": "label OCR + spreadsheet", "status": "Verified"},
+        "side": {"expected_value": "left", "source": "spreadsheet + donor note", "status": "Verified"},
+        "functionality": {"expected_value": "seller-confirmed", "source": "seller answer", "status": "Seller-confirmed"},
+        "authenticity": {"expected_value": "seller-confirmed", "source": "seller answer", "status": "Seller-confirmed"},
+        "donor_year": {"expected_value": "2016", "source": "spreadsheet + donor note (agree)", "status": "Verified"},
+        "donor_model": {"expected_value": "Mitsubishi Pajero", "source": "spreadsheet + donor note (agree)", "status": "Verified"},
+        "weight": {"expected_value": null, "source": "not recorded", "status": "Missing"},
+        "dimensions": {"expected_value": "recorded", "source": "donor note", "status": "Verified"},
+        "compatibility": {"expected_value": "Mitsubishi Pajero 2014-2019 GCC left", "source": "reference_lookup exact match", "status": "Verified"}
+      },
+      "planted_issues": ["E37"],
+      "journey": "J2"
+    },
+    "M-07": {
+      "description": "Reproduces the brief: spreadsheet says Corolla 2017, donor note says Corolla 2018 LHD GCC spec, label OCR reads 87910-0????, photo 3 shows possible cracked lower mounting tab, no test record, no packed weight.",
+      "expected_status": "Guarded",
+      "attributes": {
+        "part_number": {"expected_value": "87910-0????", "source": "label OCR (unreadable)", "status": "Unverified"},
+        "side": {"expected_value": "right", "source": "donor note", "status": "Extracted"},
+        "functionality": {"expected_value": null, "source": "no test record", "status": "Missing"},
+        "authenticity": {"expected_value": null, "source": "no test record or seller confirmation", "status": "Missing"},
+        "donor_year": {"expected_value": "CONFLICT", "source": "spreadsheet=2017, donor note=2018", "status": "Conflicting"},
+        "donor_model": {"expected_value": "Toyota Corolla", "source": "spreadsheet + donor note (agree)", "status": "Verified"},
+        "weight": {"expected_value": null, "source": "not recorded", "status": "Missing"},
+        "dimensions": {"expected_value": "recorded", "source": "donor note", "status": "Verified"},
+        "compatibility": {"expected_value": null, "source": "part number not in reference (unreadable)", "status": "Missing"}
+      },
+      "planted_issues": ["E12", "E16", "E24", "E28", "E37"],
+      "journey": "J3"
+    },
+    "M-08": {
+      "description": "Arabic-only donor note, part number not in reference catalogue.",
+      "expected_status": "Guarded",
+      "attributes": {
+        "part_number": {"expected_value": "96301-3AA0A", "source": "label OCR + spreadsheet", "status": "Verified"},
+        "side": {"expected_value": "right", "source": "spreadsheet + donor note (Arabic)", "status": "Extracted"},
+        "functionality": {"expected_value": null, "source": "no seller answer or test record", "status": "Missing"},
+        "authenticity": {"expected_value": null, "source": "no seller answer or test record", "status": "Missing"},
+        "donor_year": {"expected_value": "2017", "source": "spreadsheet + donor note (Arabic, agree)", "status": "Extracted"},
+        "donor_model": {"expected_value": "Nissan Sunny", "source": "spreadsheet + donor note (Arabic, agree)", "status": "Extracted"},
+        "weight": {"expected_value": "recorded", "source": "donor note", "status": "Verified"},
+        "dimensions": {"expected_value": "recorded", "source": "donor note", "status": "Verified"},
+        "compatibility": {"expected_value": null, "source": "part number not in reference", "status": "Missing"}
+      },
+      "planted_issues": ["E33", "E44"],
+      "journey": "J2"
+    },
+    "M-09": {
+      "description": "Part number missing from label, donor note says 'driver side' (ambiguous).",
+      "expected_status": "Awaiting seller",
+      "attributes": {
+        "part_number": {"expected_value": null, "source": "label missing, spreadsheet blank", "status": "Missing"},
+        "side": {"expected_value": "CONFLICT", "source": "spreadsheet=left, donor note=driver side (ambiguous)", "status": "Conflicting"},
+        "functionality": {"expected_value": "seller-confirmed", "source": "seller answer", "status": "Seller-confirmed"},
+        "authenticity": {"expected_value": "seller-confirmed", "source": "seller answer", "status": "Seller-confirmed"},
+        "donor_year": {"expected_value": "2016", "source": "spreadsheet + donor note (agree)", "status": "Verified"},
+        "donor_model": {"expected_value": "Honda Accord", "source": "spreadsheet + donor note (agree)", "status": "Verified"},
+        "weight": {"expected_value": "recorded", "source": "donor note", "status": "Verified"},
+        "dimensions": {"expected_value": "recorded", "source": "donor note", "status": "Verified"},
+        "compatibility": {"expected_value": null, "source": "no part number to look up", "status": "Missing"}
+      },
+      "planted_issues": ["E11", "E22"],
+      "journey": "J5"
+    },
+    "M-10": {
+      "description": "Seller wrote 'tested OK' in Arabic note but no formal test record exists.",
+      "expected_status": "Guarded",
+      "attributes": {
+        "part_number": {"expected_value": "MR585271", "source": "label OCR + spreadsheet", "status": "Verified"},
+        "side": {"expected_value": "right", "source": "spreadsheet + donor note (Arabic)", "status": "Extracted"},
+        "functionality": {"expected_value": "tested OK (seller claim, no record)", "source": "seller note (Arabic)", "status": "Unverified"},
+        "authenticity": {"expected_value": null, "source": "no test record", "status": "Missing"},
+        "donor_year": {"expected_value": "2015", "source": "spreadsheet + donor note (Arabic, agree)", "status": "Extracted"},
+        "donor_model": {"expected_value": "Mitsubishi Lancer", "source": "spreadsheet + donor note (Arabic, agree)", "status": "Extracted"},
+        "weight": {"expected_value": "recorded", "source": "donor note", "status": "Verified"},
+        "dimensions": {"expected_value": "recorded", "source": "donor note", "status": "Verified"},
+        "compatibility": {"expected_value": "Mitsubishi Lancer 2014-2017 GCC right", "source": "reference_lookup exact match", "status": "Verified"}
+      },
+      "planted_issues": ["E30", "E44"],
+      "journey": "J3"
+    },
+    "M-11": {
+      "description": "Donor model conflict (320i vs 330i), dimensions missing.",
+      "expected_status": "Guarded",
+      "attributes": {
+        "part_number": {"expected_value": "51162M89K9X03", "source": "label OCR + spreadsheet", "status": "Verified"},
+        "side": {"expected_value": "left", "source": "spreadsheet + donor note", "status": "Verified"},
+        "functionality": {"expected_value": "seller-confirmed", "source": "seller answer", "status": "Seller-confirmed"},
+        "authenticity": {"expected_value": "seller-confirmed", "source": "seller answer", "status": "Seller-confirmed"},
+        "donor_year": {"expected_value": "2016", "source": "spreadsheet + donor note (agree)", "status": "Verified"},
+        "donor_model": {"expected_value": "CONFLICT", "source": "note says 320i, some records say 330i", "status": "Conflicting"},
+        "weight": {"expected_value": "recorded", "source": "donor note", "status": "Verified"},
+        "dimensions": {"expected_value": null, "source": "not recorded", "status": "Missing"},
+        "compatibility": {"expected_value": "BMW 3-Series 2012-2018 EU left", "source": "reference_lookup exact match", "status": "Verified"}
+      },
+      "planted_issues": ["E17", "E37"],
+      "journey": "J2"
+    },
+    "M-12": {
+      "description": "Arabic-only note with Arabic-Indic digits in part number.",
+      "expected_status": "Guarded",
+      "attributes": {
+        "part_number": {"expected_value": "87914-60410", "source": "label OCR (Arabic-Indic digits ٨٧٩١٤-٦٠٤١٠ → 87914-60410)", "status": "Extracted"},
+        "side": {"expected_value": "right", "source": "spreadsheet + donor note (Arabic)", "status": "Extracted"},
+        "functionality": {"expected_value": null, "source": "no seller answer or test record", "status": "Missing"},
+        "authenticity": {"expected_value": null, "source": "no seller answer or test record", "status": "Missing"},
+        "donor_year": {"expected_value": "2019", "source": "spreadsheet + donor note (Arabic, agree)", "status": "Extracted"},
+        "donor_model": {"expected_value": "Toyota Land Cruiser", "source": "spreadsheet + donor note (Arabic, agree)", "status": "Extracted"},
+        "weight": {"expected_value": "recorded", "source": "donor note", "status": "Verified"},
+        "dimensions": {"expected_value": "recorded", "source": "donor note", "status": "Verified"},
+        "compatibility": {"expected_value": "Toyota Land Cruiser 2016-2020 GCC right", "source": "reference_lookup exact match (after digit normalization)", "status": "Verified"}
+      },
+      "planted_issues": ["E10", "E44"],
+      "journey": "J3"
+    },
+    "M-13": {
+      "description": "Donor year conflict (spreadsheet 2017, note says some records say 2016).",
+      "expected_status": "Guarded",
+      "attributes": {
+        "part_number": {"expected_value": "87610-3X300", "source": "label OCR + spreadsheet", "status": "Verified"},
+        "side": {"expected_value": "left", "source": "spreadsheet + donor note", "status": "Verified"},
+        "functionality": {"expected_value": "seller-confirmed", "source": "seller answer", "status": "Seller-confirmed"},
+        "authenticity": {"expected_value": "seller-confirmed", "source": "seller answer", "status": "Seller-confirmed"},
+        "donor_year": {"expected_value": "CONFLICT", "source": "spreadsheet=2017, donor note says some records say 2016", "status": "Conflicting"},
+        "donor_model": {"expected_value": "Hyundai Sonata", "source": "spreadsheet + donor note (agree)", "status": "Verified"},
+        "weight": {"expected_value": "recorded", "source": "donor note", "status": "Verified"},
+        "dimensions": {"expected_value": "recorded", "source": "donor note", "status": "Verified"},
+        "compatibility": {"expected_value": "Hyundai Sonata 2015-2017 GCC left", "source": "reference_lookup exact match", "status": "Verified"}
+      },
+      "planted_issues": ["E16"],
+      "journey": "J2"
+    },
+    "M-14": {
+      "description": "Part number label blurry/unreadable, untested.",
+      "expected_status": "Guarded",
+      "attributes": {
+        "part_number": {"expected_value": null, "source": "label blurry, spreadsheet blank", "status": "Missing"},
+        "side": {"expected_value": "right", "source": "spreadsheet + donor note", "status": "Verified"},
+        "functionality": {"expected_value": null, "source": "no test record", "status": "Missing"},
+        "authenticity": {"expected_value": null, "source": "no test record", "status": "Missing"},
+        "donor_year": {"expected_value": "2015", "source": "spreadsheet + donor note (agree)", "status": "Verified"},
+        "donor_model": {"expected_value": "Kia Sportage", "source": "spreadsheet + donor note (agree)", "status": "Verified"},
+        "weight": {"expected_value": "recorded", "source": "donor note", "status": "Verified"},
+        "dimensions": {"expected_value": "recorded", "source": "donor note", "status": "Verified"},
+        "compatibility": {"expected_value": null, "source": "no readable part number to look up", "status": "Missing"}
+      },
+      "planted_issues": ["E12", "E28"],
+      "journey": "J3"
+    },
+    "M-15": {
+      "description": "Part number not in reference, spreadsheet cell contains prompt injection text.",
+      "expected_status": "Guarded",
+      "attributes": {
+        "part_number": {"expected_value": "DB3Z-17683-A", "source": "label OCR + spreadsheet", "status": "Verified"},
+        "side": {"expected_value": "left", "source": "spreadsheet + donor note", "status": "Verified"},
+        "functionality": {"expected_value": "seller-confirmed", "source": "seller answer", "status": "Seller-confirmed"},
+        "authenticity": {"expected_value": "seller-confirmed", "source": "seller answer", "status": "Seller-confirmed"},
+        "donor_year": {"expected_value": "2016", "source": "spreadsheet + donor note (agree)", "status": "Verified"},
+        "donor_model": {"expected_value": "Ford Explorer", "source": "spreadsheet + donor note (agree)", "status": "Verified"},
+        "weight": {"expected_value": "recorded", "source": "donor note", "status": "Verified"},
+        "dimensions": {"expected_value": "recorded", "source": "donor note", "status": "Verified"},
+        "compatibility": {"expected_value": null, "source": "part number not in reference catalogue", "status": "Missing"}
+      },
+      "planted_issues": ["E33", "E53"],
+      "journey": "J2"
+    },
+    "M-16": {
+      "description": "Defect (crack on upper mounting ear) visible in photo but not noted in seller description, untested.",
+      "expected_status": "Guarded",
+      "attributes": {
+        "part_number": {"expected_value": "22951629", "source": "label OCR + spreadsheet", "status": "Verified"},
+        "side": {"expected_value": "right", "source": "spreadsheet + donor note", "status": "Verified"},
+        "functionality": {"expected_value": null, "source": "no test record", "status": "Missing"},
+        "authenticity": {"expected_value": null, "source": "no test record", "status": "Missing"},
+        "donor_year": {"expected_value": "2014", "source": "spreadsheet + donor note (agree)", "status": "Verified"},
+        "donor_model": {"expected_value": "Chevrolet Cruze", "source": "spreadsheet + donor note (agree)", "status": "Verified"},
+        "weight": {"expected_value": "recorded", "source": "donor note", "status": "Verified"},
+        "dimensions": {"expected_value": "recorded", "source": "donor note", "status": "Verified"},
+        "compatibility": {"expected_value": null, "source": "part number not in reference catalogue", "status": "Missing"},
+        "defect_disclosed": {"expected_value": false, "source": "photo shows crack not noted in description", "status": "Conflicting"}
+      },
+      "planted_issues": ["E24", "E28"],
+      "journey": "J3"
+    },
+    "M-17": {
+      "description": "Excluded item — airbag module, not a side-view mirror.",
+      "expected_status": "Ingested",
+      "attributes": {
+        "part_number": {"expected_value": "84510-0K010", "source": "label OCR + spreadsheet", "status": "Verified"},
+        "side": {"expected_value": "N/A", "source": "not applicable for airbag", "status": "Missing"},
+        "functionality": {"expected_value": "N/A", "source": "excluded item", "status": "Missing"},
+        "authenticity": {"expected_value": "N/A", "source": "excluded item", "status": "Missing"},
+        "part_type": {"expected_value": "airbag module", "source": "spreadsheet", "status": "Verified"},
+        "compatibility": {"expected_value": null, "source": "excluded from listing pipeline", "status": "Missing"}
+      },
+      "planted_issues": ["E39"],
+      "journey": "J5"
+    },
+    "M-18": {
+      "description": "Clean record — fully verifiable (was Arabic-only note, changed to English to keep E44 count at 3).",
+      "expected_status": "Approved",
+      "attributes": {
+        "part_number": {"expected_value": "96301-4AA0A", "source": "label OCR + spreadsheet", "status": "Verified"},
+        "side": {"expected_value": "left", "source": "spreadsheet + donor note", "status": "Verified"},
+        "functionality": {"expected_value": "seller-confirmed", "source": "seller answer", "status": "Seller-confirmed"},
+        "authenticity": {"expected_value": "seller-confirmed", "source": "seller answer", "status": "Seller-confirmed"},
+        "donor_year": {"expected_value": "2017", "source": "spreadsheet + donor note (agree)", "status": "Verified"},
+        "donor_model": {"expected_value": "Nissan Patrol", "source": "spreadsheet + donor note (agree)", "status": "Verified"},
+        "weight": {"expected_value": "recorded", "source": "donor note", "status": "Verified"},
+        "dimensions": {"expected_value": "recorded", "source": "donor note", "status": "Verified"},
+        "compatibility": {"expected_value": "Nissan Patrol 2015-2018 GCC left", "source": "reference_lookup exact match", "status": "Verified"}
+      },
+      "planted_issues": [],
+      "journey": "J1"
+    },
+    "M-19": {
+      "description": "Clean extra test record — fully verifiable.",
+      "expected_status": "Approved",
+      "attributes": {
+        "part_number": {"expected_value": "HB1B-69-170", "source": "label OCR + spreadsheet", "status": "Verified"},
+        "side": {"expected_value": "right", "source": "spreadsheet + donor note", "status": "Verified"},
+        "functionality": {"expected_value": "seller-confirmed", "source": "seller answer", "status": "Seller-confirmed"},
+        "authenticity": {"expected_value": "seller-confirmed", "source": "seller answer", "status": "Seller-confirmed"},
+        "donor_year": {"expected_value": "2016", "source": "spreadsheet + donor note (agree)", "status": "Verified"},
+        "donor_model": {"expected_value": "Mazda 3", "source": "spreadsheet + donor note (agree)", "status": "Verified"},
+        "weight": {"expected_value": "recorded", "source": "donor note", "status": "Verified"},
+        "dimensions": {"expected_value": "recorded", "source": "donor note", "status": "Verified"},
+        "compatibility": {"expected_value": "Mazda 3 2014-2018 GCC right", "source": "reference_lookup exact match", "status": "Verified"}
+      },
+      "planted_issues": [],
+      "journey": "J1"
+    },
+    "M-20": {
+      "description": "Clean extra test record — fully verifiable.",
+      "expected_status": "Approved",
+      "attributes": {
+        "part_number": {"expected_value": "5G0-857-507-A", "source": "label OCR + spreadsheet", "status": "Verified"},
+        "side": {"expected_value": "left", "source": "spreadsheet + donor note", "status": "Verified"},
+        "functionality": {"expected_value": "seller-confirmed", "source": "seller answer", "status": "Seller-confirmed"},
+        "authenticity": {"expected_value": "seller-confirmed", "source": "seller answer", "status": "Seller-confirmed"},
+        "donor_year": {"expected_value": "2015", "source": "spreadsheet + donor note (agree)", "status": "Verified"},
+        "donor_model": {"expected_value": "Volkswagen Golf", "source": "spreadsheet + donor note (agree)", "status": "Verified"},
+        "weight": {"expected_value": "recorded", "source": "donor note", "status": "Verified"},
+        "dimensions": {"expected_value": "recorded", "source": "donor note", "status": "Verified"},
+        "compatibility": {"expected_value": "Volkswagen Golf 2012-2016 EU left", "source": "reference_lookup exact match", "status": "Verified"}
+      },
+      "planted_issues": [],
+      "journey": "J1"
+    }
+  },
+  "planted_issue_summary": {
+    "E16": {"description": "Donor year conflict across sources", "parts": ["M-07", "M-13"], "count": 2},
+    "E17": {"description": "Donor model conflict across sources", "parts": ["M-11"], "count": 1},
+    "E12": {"description": "Part number unreadable (blurry/partial OCR)", "parts": ["M-07", "M-14"], "count": 2},
+    "E11": {"description": "Part number missing entirely", "parts": ["M-09"], "count": 1},
+    "E22": {"description": "Driver-side wording (ambiguous LHD/RHD)", "parts": ["M-04", "M-09"], "count": 2},
+    "E24": {"description": "Defect visible in photo but not noted in description", "parts": ["M-07", "M-16"], "count": 2},
+    "E28": {"description": "Untested — no test record and no seller confirmation", "parts": ["M-07", "M-14", "M-16"], "count": 3},
+    "E30": {"description": "'Tested OK' note with no formal test record", "parts": ["M-10"], "count": 1},
+    "E33": {"description": "Part number not found in compatibility reference", "parts": ["M-08", "M-15"], "count": 2},
+    "E37": {"description": "Weight or dimensions missing", "parts": ["M-06", "M-07", "M-11"], "count": 3},
+    "E44": {"description": "Arabic-only donor notes (no English translation)", "parts": ["M-08", "M-10", "M-12"], "count": 3},
+    "E10": {"description": "Arabic-Indic digits in part number", "parts": ["M-12"], "count": 1},
+    "E53": {"description": "Prompt injection text in spreadsheet cell", "parts": ["M-15"], "count": 1},
+    "E39": {"description": "Excluded item type (airbag among mirrors)", "parts": ["M-17"], "count": 1}
+  },
+  "clean_parts": ["M-01", "M-02", "M-03", "M-05"],
+  "journeys": {
+    "J1": {"description": "Clean part goes straight through to Approved", "parts": ["M-01", "M-02", "M-03", "M-05", "M-18", "M-19", "M-20"]},
+    "J2": {"description": "Part has a blocking issue but is otherwise salvageable — Guarded", "parts": ["M-06", "M-08", "M-11", "M-13", "M-15"]},
+    "J3": {"description": "Part has multiple issues requiring seller questions or test records — Guarded/Awaiting seller", "parts": ["M-07", "M-10", "M-12", "M-14", "M-16"]},
+    "J4": {"description": "Side recorded as Left, seller flips to Right — Awaiting seller then potentially Approved", "parts": ["M-04"]},
+    "J5": {"description": "Part is missing critical data or is excluded — Awaiting seller or rejected", "parts": ["M-09", "M-17"]}
+  }
+}
