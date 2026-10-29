@@ -235,6 +235,15 @@ class APIClient:
         """Start a session. Returns {token, seller_id, profile, context_card}, or None if offline."""
         return self._post("/sessions", {"display_name": display_name})
 
+    def logout(self, token: str | None) -> None:
+        """End the session on the gateway (best effort: an expired token is already gone)."""
+        if not token:
+            return
+        try:
+            requests.delete(f"{self.base_url}/sessions", headers=_auth(token), timeout=_TIMEOUT)
+        except Exception:
+            pass
+
     def get_profile(self, token: str | None) -> dict[str, Any] | None:
         """The seller-details screen: {profile, editable_fields}, or None if offline / not logged in."""
         return self._get("/me/profile", token) if token else None

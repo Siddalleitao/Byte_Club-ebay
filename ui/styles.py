@@ -1587,4 +1587,175 @@ def get_css(lang: str = "en", theme: str = "light") -> str:
 .pp-expander.open .pp-expander-body {{
     display: block;
 }}
+
+/* ═══════════════════════════════════════════════
+   LIVE APP — controls rendered by the controller
+   ═══════════════════════════════════════════════ */
+/* Panes are laid out in visual order by the controller, so the track
+   always scrolls left-to-right; each pane keeps the language's direction. */
+.pp-app .pp-pane-track,
+.pp-app[data-pp-dir="rtl"] .pp-pane-track {{
+    direction: ltr;
+    flex-direction: row;
+}}
+.pp-app[data-pp-dir="rtl"] .pp-pane {{ direction: rtl; }}
+.pp-app[data-pp-dir="ltr"] .pp-pane {{ direction: ltr; }}
+
+.pp-app button {{ font: inherit; }}
+.pp-ring, .pp-context-item, .pp-story-close, .pp-metric-btn, .pp-link {{
+    background: none;
+    border: none;
+    padding: 0;
+    color: inherit;
+}}
+.pp-ring {{ cursor: pointer; }}
+.pp-context-item {{ width: 100%; text-align: start; padding: 12px 16px; }}
+.pp-metric-btn {{
+    cursor: pointer;
+    background: var(--pp-bg-tertiary);
+    padding: 12px;
+    min-width: 80px;
+}}
+.pp-metric-btn:hover {{ outline: 2px solid var(--pp-primary); }}
+
+.pp-profile-fab {{
+    position: absolute;
+    top: calc(10px + env(safe-area-inset-top));
+    inset-inline-end: 12px;
+    z-index: 120;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 1px solid var(--pp-border);
+    background: var(--pp-bg);
+    color: var(--pp-text);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}}
+.pp-stories-header, .pp-chats-header, .pp-discover-header {{ padding-inline-end: 64px; }}
+
+.pp-session-banner {{
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 800;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background: var(--pp-status-specialist);
+    color: white;
+    font-size: 13px;
+    font-weight: 600;
+}}
+.pp-session-banner.show {{ display: flex; }}
+
+.pp-section-label {{
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--pp-text-secondary);
+    margin: 16px 0 8px;
+}}
+.pp-field-label {{
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--pp-text-secondary);
+    margin: 8px 0 4px;
+}}
+select.pp-input {{ appearance: auto; }}
+
+.pp-viewfinder video, .pp-viewfinder img {{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}}
+.pp-viewfinder .pp-shutter {{
+    position: absolute;
+    bottom: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    margin: 0;
+}}
+.pp-capture-bar {{
+    width: 100%;
+    max-width: 360px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 12px;
+}}
+.pp-capture-bar[hidden] {{ display: none; }}
+
+.pp-spinner {{
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba(255,255,255,0.4);
+    border-top-color: white;
+    border-radius: 50%;
+    display: inline-block;
+    animation: pp-spin 0.8s linear infinite;
+}}
+@keyframes pp-spin {{ to {{ transform: rotate(360deg); }} }}
+
+.pp-approve-banner {{
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 12px;
+    border-radius: var(--pp-radius);
+    background: rgba(37,99,235,0.08);
+    border: 1px solid var(--pp-status-ready);
+    font-size: 14px;
+    font-weight: 600;
+}}
+.pp-hold-approve {{ background: var(--pp-status-approved); width: 100%; }}
+.pp-hold-save {{ background: var(--pp-primary); }}
+
+.pp-link {{
+    display: block;
+    margin-top: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--pp-primary);
+    cursor: pointer;
+}}
+.pp-dot {{
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    background: var(--pp-status-missing);
+}}
+.pp-dot.status-approved {{ background: var(--pp-status-approved); }}
+.pp-dot.status-ready {{ background: var(--pp-status-ready); }}
+.pp-dot.status-specialist {{ background: var(--pp-status-specialist); }}
+.pp-card-deferred {{ opacity: 0.65; }}
+
+.pp-corridor-card {{
+    background: var(--pp-bg-secondary);
+    border-radius: var(--pp-radius);
+    padding: 24px;
+    margin-bottom: 16px;
+    text-align: center;
+}}
+
+/* The tap zones sit under the story content; only the card itself takes clicks. */
+.pp-story-content {{ pointer-events: none; }}
+.pp-story-card {{ pointer-events: auto; }}
+.pp-story-nav {{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: 20px;
+}}
+.pp-story-nav .pp-btn {{ min-width: 48px; font-size: 20px; }}
+.pp-btn:disabled {{ opacity: 0.5; cursor: default; }}
 """

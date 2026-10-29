@@ -5,8 +5,11 @@ Hackathon prototype: 10 used side-view mirrors, UAE → UK corridor, mock eBay e
 
 ## Quick Start
 
+Run every command from the project root. Each new terminal needs the venv active
+(VS Code activates `.venv` automatically; you'll see `(.venv)` in the prompt).
+
 ```bash
-# 1. Create venv and install deps
+# 1. Create venv and install deps (once)
 python -m venv .venv
 source .venv/bin/activate   # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
@@ -28,16 +31,41 @@ python scripts/seed.py
 # 6. (Optional) Run tests
 pytest
 
-# 7. Run the API
-python scripts/run_api.py
+# 7. Run the API (terminal 1; start it first)
+python -m uvicorn app.api.main:app --port 8000 --reload
 
-# 8. In another terminal, run the UI
-python scripts/run_ui.py          # camera-first shell, port 8501
-python scripts/run_workspace.py   # part workspace (board, part detail, quarantine), port 8502
+# 8. Run the UIs (terminals 2 and 3)
+python -m streamlit run ui/app.py --server.port 8501         # camera-first app
+python -m streamlit run ui/workspace.py --server.port 8502   # part workspace (board, part detail, quarantine)
 ```
+
+Then open http://localhost:8501 (camera-first app), http://localhost:8502 (workspace)
+or http://localhost:8000/docs (API docs).
+
+Use `python -m …` as above. `python scripts/run_api.py` fails with
+`No module named 'app'`, because running a file in `scripts/` doesn't put the
+project root on the import path.
 
 By default `FIXTURE_MODE=true` — the app runs with no API key by replaying
 recorded JSON from `data/fixtures/`.
+
+### Troubleshooting
+
+| Error | Fix |
+|---|---|
+| `No module named 'uvicorn'` (or `streamlit`) | The venv is active but its packages aren't installed: run `pip install -r requirements.txt`. |
+| `No module named 'app'` | Start the API with `python -m uvicorn …` from the project root, not `scripts/run_api.py`. |
+| Port already in use | Another copy is still running. Windows: `netstat -ano \| findstr :8000`, then `taskkill /PID <pid> /F` (same for 8501 and 8502). |
+| Answers in the chat don't change a part's status | The pipeline's state lives in the API's memory and is lost on restart. The camera-first app re-runs it when the page loads; in the workspace, press **Run pipeline**. |
+
+### Missing source files
+
+Six modules are not in the repository: `app/data/audit.py`,
+`app/domain/approval.py`, `app/domain/export.py`, `app/observability/__init__.py`,
+`app/observability/latency.py` and `app/orchestration/observability.py`. On the
+machine where they were compiled, the API runs from their Python 3.14 bytecode
+(`.pyc` files next to each package, which are gitignored). A fresh clone, or any
+other Python version, fails at import until the original `.py` files are committed.
 
 ## Architecture
 
@@ -379,7 +407,7 @@ Play the journeys on a freshly seeded database (`python scripts/seed.py`), then 
 - **J3, M-15:** the board flags it, the Quarantine page shows the injected cell and note, and no status moves.
 - **J4, M-04:** answer its two questions, then `Change M-04 to right side`: title, item specifics, compatibility (side mismatch) and checklist update in one step, and History shows left → right.
 
-The pipeline's checkpoint state is in memory, so after restarting the API press **Run pipeline** again before answering.
+The pipeline's checkpoint state is in memory, so after restarting the API press **Run pipeline** again before answering. (The camera-first app on port 8501 does this by itself when it loads.)
 
 `pytest tests/test_workspace_ui.py` plays J1 to J4 through the real pages (Streamlit AppTest) against the gateway in-process. AppTest cannot attach files to the chat box, so the J2 upload uses the same client call the chat makes.
 
@@ -387,35 +415,60 @@ The pipeline's checkpoint state is in memory, so after restarting the API press 
 
 The UI uses a camera-first messaging-app interaction model. Every gesture has a visible button alternative.
 
+### How it talks to the API
+
+`ui/app.py` handles login (the profile picker calls `GET /profiles`, then
+`POST /sessions`) and hands the session token to the page. The page runs inside
+an iframe and cannot call back into Streamlit, so `ui/controller.py` calls the
+gateway's `/me/*` endpoints directly with that token and re-renders each pane
+from the response:
+
+| Action | Endpoint |
+|---|---|
+| Board, queue and home counts | `GET /me/board`, `GET /me/quarantine` |
+| Open a part's thread | `GET /me/parts/{sku}/detail` |
+| Answer a question | `POST /me/chat` |
+| Approve | `POST /me/parts/{sku}/approve` |
+| Send a photo | `POST /me/parts/{sku}/photos` |
+| Run pipeline | `POST /me/pipeline/run?wait=true` |
+| Seller details | `GET` / `PUT /me/profile`, `GET /reference` |
+
+The API must be running before you log in. If the API restarts, the app logs in
+again by itself and, because the pipeline state was lost, re-runs the pipeline.
+
 ### Navigation
 
 | Gesture | Button Alternative | Description |
 |---|---|---|
-| Swipe left/right | Bottom bar icons (5) | Move between panes: Map, Chats, Home, Stories, Discover |
-| Swipe down from top | "Profile" icon | Opens the Profile/Settings sheet |
-| Swipe up from Home | "Board" icon | Opens the inventory grid |
-| Flick (fast swipe) | Same as swipe — velocity > 0.5 triggers at 40px | Velocity-based snap |
+| Swipe left/right | Bottom bar icons (5) | Move between panes: Map, Chats, Home, Board, Queue (native scroll snap) |
+| Swipe down from top | Profile button (top corner) | Opens the Profile/Settings sheet |
+| Swipe up from Home | "Board" icon | Opens the inventory board |
 
 ### Home (Camera/Create)
 
 | Gesture | Button Alternative | Description |
 |---|---|---|
-| Tap centre button | Round camera button in bottom bar | Opens viewfinder (`getUserMedia`, back camera) |
-| Tap shutter | "Capture" button | Takes a photo |
-| — | "Upload Spreadsheet" button | File input for CSV/XLSX |
-| — | "Upload Notes" button | File input for donor notes |
+| Tap centre button | "Open camera" button | Opens viewfinder (`getUserMedia`, back camera) |
+| Tap shutter | — | Takes a photo |
+| — | "Choose a photo" button | Picks an image file instead |
+| — | "Send photo" | Attaches the photo to the part picked in the list |
+| — | "Run pipeline" | Re-processes every part, then refreshes the board |
 
-If camera is unavailable, a file-input fallback appears automatically.
+The status tiles on Home jump to the board filtered to that status. If the
+camera is unavailable, the file picker opens instead. There is no spreadsheet or
+donor-notes upload: the gateway has no ingest endpoint, so parts come from the
+seeded files (`python scripts/seed.py`).
 
-### Stories (Inventory Board)
+### Board (Inventory)
 
 | Gesture | Button Alternative | Description |
 |---|---|---|
-| Tap status ring | "View Questions" button on card | Opens full-screen story card |
-| Tap right half | "Next" arrow | Next part story |
-| Tap left half | "Previous" arrow | Previous part story |
+| Tap status ring | "Open the part" link on card | Opens full-screen story card for that part |
+| Tap right half | "›" button | Next part story |
+| Tap left half | "‹" button | Previous part story |
 | Swipe down | "Close" (X) button | Closes story overlay |
-| Auto-advance (5s) | Manual tap to advance | Progress bars on top show timer |
+| Auto-advance (6s) | Manual tap to advance | Progress bars on top show timer; touching the card pauses it |
+| — | Search box, status filter chips | Filter the rings and cards |
 
 Ring colour = status, always paired with an icon (✅🔵⚠️🔴) — colour is never the only signal.
 
@@ -423,49 +476,57 @@ Ring colour = status, always paired with an icon (✅🔵⚠️🔴) — colour 
 
 | Gesture | Button Alternative | Description |
 |---|---|---|
-| Tap a thread | Chat item row | Opens question thread for a part |
-| Tap quick-reply chip | Type answer in input field | Sends a common answer instantly |
-| — | "Send" button | Sends custom text answer |
+| Tap a thread | Chat item row, "Answer questions" on a card | Opens the part's open questions |
+| Tap quick-reply chip | Type answer in input field | Sends a common answer (shown for test status and side) |
+| — | "Send" button or Enter | Sends a custom answer |
 | Tap "retry" | "Retry" link | Re-sends a failed message (optimistic send) |
 
-### Discover (Queue)
+When a part reaches *Ready for seller review*, the thread shows **Hold to approve**.
+
+### Queue
 
 | Gesture | Button Alternative | Description |
 |---|---|---|
-| Swipe right | "Do now" button | Act on this item immediately |
-| Swipe left | "Later" button | Defer to later (never deleted) |
+| Swipe right | "Do now" button | Opens that part's chat |
+| Swipe left | "Later" button | Moves the card to *Deferred* (never deleted) |
+
+Blocked (quarantined) input comes first, then specialist review, then parts with
+questions waiting, then parts ready to approve.
 
 ### Profile/Settings Sheet
 
 | Gesture | Button Alternative | Description |
 |---|---|---|
-| Swipe down from top | "Profile" icon | Opens sheet |
-| Swipe up / tap backdrop | "Close" (X) button | Closes sheet |
-| Hold "Save" 1.2s | Regular "Save" also works | Hold-to-confirm for profile save (cache invalidation) |
+| Swipe down from top | Profile button | Opens sheet |
+| Tap backdrop | "Close" (X) button, Esc | Closes sheet (unsaved edits are discarded) |
+| Hold "Save" 1.2s | A single tap also saves | Saves the editable fields through `PUT /me/profile` |
+| — | Language button | Switches English / العربية (right to left) |
+| — | "Replay tutorial" | Shows the 3-card tutorial again |
 
 ### Hold-to-Confirm
 
-Important or irreversible actions (approve, submit, save profile) use hold-to-confirm:
-- A ring fills over ~1.2 seconds
+Important actions use hold-to-confirm:
+- A bar fills over ~1.2 seconds
 - Releasing early cancels the action
 - A full hold confirms
-- Always has a visible button alternative
+- Approve accepts only a full hold; Save also accepts a single tap
 
 ### Context Menu
 
 | Gesture | Button Alternative | Description |
 |---|---|---|
-| Long-press an item | Right-click (desktop) | Opens context menu with actions |
+| Long-press an item | Right-click (desktop) | Opens context menu: answer questions, open the part |
 | — | Buttons on cards | Same actions available as buttons |
 
 ### Other
 
 | Gesture | Button Alternative | Description |
 |---|---|---|
-| Pull to refresh | "Refresh" button | Reloads data |
-| Arrow keys (desktop) | Bottom bar icons | Navigate panes |
-| Space (desktop) | Tap right zone | Advance story |
+| Pull to refresh | Refresh button on the board | Reloads data from the API |
+| Arrow keys (desktop) | Bottom bar icons | Navigate panes (not while typing) |
+| Space / arrow keys (desktop) | Tap right zone | Advance story |
 | Esc (desktop) | Close button | Close any overlay |
+| — | "Log out" under the app | Ends the session |
 
 ### Accessibility
 
@@ -477,8 +538,8 @@ Important or irreversible actions (approve, submit, save profile) use hold-to-co
 - RTL languages mirror pane order and swipe direction
 - First launch shows a 3-card tutorial (skippable, shown once)
 
-### PWA
+### Offline
 
-- Installable: manifest, original app icon, service worker
-- Offline banner appears when network is lost
-- App shell cached for offline use
+- An offline banner appears when the network is lost; data reloads when it comes back
+- The app is not installable as a PWA: Streamlit does not serve the manifest or
+  service worker, so that registration was removed

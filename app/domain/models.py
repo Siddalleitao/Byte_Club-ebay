@@ -62,6 +62,8 @@ class SellerProfile(BaseModel):
     inventory_currency: str = "AED"
     listing_currency: str = "GBP"
     fx_rate_source: str | None = Field(default=None, max_length=120)
+    fx_rate: float | None = Field(default=None, gt=0)  # dated test rate: 1 inventory_currency = fx_rate listing_currency (E40)
+    fx_rate_date: str | None = None
     handling_days: int = Field(ge=0, le=30)
     return_policy_ref: str | None = Field(default=None, max_length=40)
     rack_codes: list[str] = Field(default_factory=list)
